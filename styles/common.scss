@@ -1,0 +1,123 @@
+body *,
+page view {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+body {
+  font-family: PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, Tahoma,
+    Arial, PingFang SC-Light, Microsoft YaHei;
+  margin: 0;
+}
+button {
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  outline: none;
+  background-color: transparent;
+}
+
+button:active {
+  opacity: 0.6;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.justify-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+.justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+.justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+.align-start {
+  display: flex;
+  align-items: flex-start;
+}
+.align-center {
+  display: flex;
+  align-items: center;
+}
+.align-end {
+  display: flex;
+  align-items: flex-end;
+}
+.fontb{
+	font-weight: bold;
+}
+.mt5{
+	margin-top: 5rpx;
+}
+.mt10{
+	margin-top: 10rpx;
+}
+.mt20{
+	margin-top: 20rpx;
+}
+.mt40{
+	margin-top: 40rpx;
+}
+.mt50{
+	margin-top: 50rpx;
+}
+.mt100{
+	margin-top: 100rpx;
+}
+.ml5{
+	margin-left: 5rpx;
+}
+.ml10{
+	margin-left: 10rpx;
+}
+.ml20{
+	margin-left: 20rpx;
+}
+.ml40{
+	margin-left: 40rpx;
+}
+.ml50{
+	margin-left: 50rpx;
+}
+.ml100{
+	margin-left: 100rpx;
+}
+.mb5{
+	margin-bottom: 5rpx;
+}
+.mb10{
+	margin-bottom: 10rpx;
+}
+.mb20{
+	margin-bottom: 20rpx;
+}
+.mb40{
+	margin-bottom: 40rpx;
+}
+.mb50{
+	margin-bottom: 50rpx;
+}
+.mb100{
+	margin-bottom: 100rpx;
+}

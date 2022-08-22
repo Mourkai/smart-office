@@ -1,0 +1,6 @@
+.project
+.idea
+unpackage/
+.DS_Store
+util/api.js
+manifest.json

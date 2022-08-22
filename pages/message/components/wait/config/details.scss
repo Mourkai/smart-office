@@ -1,0 +1,97 @@
+.content {
+		margin: 20rpx;
+		overflow: hidden;
+		border-bottom: 1px dotted #D7D7D7;
+
+		.pro-title {
+			margin: 12rpx 0 20rpx 0;
+			font-size: 32rpx;
+		}
+
+		.content-item {
+			margin-bottom: 30rpx;
+			font-size: 30rpx;
+			display: flex;
+
+			.title {
+				min-width: 170rpx;
+				color: #666666;
+				line-height: 50rpx;
+			}
+
+			.desc {
+				flex: 1;
+				color: #333;
+				font-size: 29rpx;
+				line-height: 50rpx;
+			}
+		}
+
+		.file-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20rpx;
+
+			.icon {
+				width: 50rpx;
+				height: 50rpx;
+				padding-top: 17rpx;
+			}
+
+			.file-name {
+				flex: 1;
+				color: #333;
+				line-height: 60rpx;
+				font-size: 30rpx;
+			}
+
+			.see {
+				width: 100rpx;
+				margin-right: 20rpx;
+
+				.u-button {
+					height: 50rpx;
+				}
+			}
+		}
+	}
+	.file-content {
+		text-align: center;
+		padding: 50rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	
+		.icon {
+			margin-bottom: 20rpx;
+		}
+	}
+	
+	
+	.work-table {
+		border: solid #ddd;
+		border-width: 1px 0px 0px 1px;
+		width: 100%;
+		color: #666666;
+		margin-bottom: 15px;
+		th {
+			font-weight: 300;
+			padding: 8rpx;
+			font-size: 25rpx;
+			border: 1px solid #ddd;
+			color: #fff;
+			background-color: $main-color;
+			border-width: 0px 1px 1px 0px;
+		}
+	
+		tr:hover {
+			background-color: #eee;
+		}
+	
+		td {
+			padding:15rpx;
+			font-size: 25rpx;
+			border: solid #ddd;
+			border-width: 0px 1px 1px 0px;
+		}
+	}

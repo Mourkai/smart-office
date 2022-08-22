@@ -1,0 +1,691 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false, //禁用原生导航栏
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/index/notice",
+			"style": {
+				"navigationBarTitleText": "公告"
+			}
+		},
+		{
+			"path": "pages/index/no-page",
+			"style": {
+				"navigationBarTitleText": "暂未开放",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/common/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/common/fileView",
+			"style": {
+				"navigationBarTitleText": "附件查看",
+				"titleNView": {
+					"splitLine": {
+						"color": "#eee"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/work-hours/index",
+			"style": {
+				"navigationBarTitleText": "工时",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/oa/index",
+			"style": {
+				"navigationBarTitleText": "审批",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/daily/index",
+			"style": {
+				"navigationBarTitleText": "日志",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/daily/add",
+			"style": {
+				"navigationBarTitleText": "工作日志",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						},
+						"buttons": [{
+							"color": "#333",
+							"colorPressed": "#eee",
+							"float": "right",
+							"type": "menu"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/daily/edit",
+			"style": {
+				"navigationBarTitleText": "工作日志",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/daily/details",
+			"style": {
+				"navigationBarTitleText": "工作日志",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/common-used/oa/details",
+			"style": {
+				"navigationBarTitleText": "审批",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/contacts/contacts",
+			"style": {
+				"navigationBarTitleText": "通讯录",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#F5F6F8",
+							"borderRadius": "15px",
+							"placeholder": "输入要搜索内容"
+						},
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/contacts/choose",
+			"style": {
+				"navigationBarTitleText": "选择人员",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#F5F6F8",
+							"borderRadius": "15px",
+							"placeholder": "输入要搜索内容"
+						},
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/contacts/dep",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"searchInput": {
+							"borderRadius": "15px",
+							"placeholder": "输入要搜索内容"
+						},
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/contacts/details",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/message/message",
+			"style": {
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				},
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/message/components/wait",
+			"style": {
+				"navigationBarTitleText": "待办",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				},
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/message/components/wait/daily",
+			"style": {
+				"navigationBarTitleText": "待审批日志",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/details",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/administrator",
+			"style": {
+				"navigationBarTitleText": "待审批行政管理",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/workHours",
+			"style": {
+				"navigationBarTitleText": "待审批工时",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/project",
+			"style": {
+				"navigationBarTitleText": "待审批项目管理",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/fee",
+			"style": {
+				"navigationBarTitleText": "待审批费用",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/workHoursDetails",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/feedback",
+			"style": {
+				"navigationBarTitleText": "意见与反馈",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/about",
+			"style": {
+				"navigationBarTitleText": "关于应用",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/policy",
+			"style": {
+				"navigationBarTitleText": "掌上业财隐私政策",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/service",
+			"style": {
+				"navigationBarTitleText": "掌上业财服务协议",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/notice",
+			"style": {
+				"navigationBarTitleText": "消息通知",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/personnel",
+			"style": {
+				"navigationBarTitleText": "待审批人事管理",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/message/components/wait/waitCommonDetails",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/statistics/statistics",
+			"style": {
+				"navigationBarTitleText": "统计",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登陆",
+				"app-plus": {
+					"titleNView": false //禁用原生导航栏
+				}
+			}
+		},
+		{
+			"path": "pages/user/forget",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/user/forget2",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/user/forgetDone",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/index/personnel/result/index",
+			"style": {
+				"navigationBarTitleText": "我的绩效",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+							"text": "筛选",
+							"fontSize": "15px",
+							"width": "auto"
+						}, {
+							"text": "\ue74a",
+							"fontSize": "15px",
+							"fontSrc": "/static/font_346/iconfont.ttf"
+						}],
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/personnel/result/details",
+			"style": {
+				"navigationBarTitleText": "绩效确认",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/other/comment/index",
+			"style": {
+				"navigationBarTitleText": "每日一评",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/other/comment/details",
+			"style": {
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/index/personnel/result/appeal",
+			"style": {
+				"navigationBarTitleText": "申诉"
+			}
+		},
+		{
+			"path": "pages/index/other/comment/comment",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"splitLine": {
+							"color": "#eee"
+						}
+					},
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/contacts/organization/organization",
+			"style": {
+				"navigationBarTitleText": "组织架构",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/contacts/organization/chose",
+			"style": {
+				"navigationBarTitleText": "已选择",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+							"text": "确定",
+							"fontSize": "17px",
+							"width": "auto"
+						}],
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/message/components/message/message-details",
+			"style": {
+				"navigationBarTitleText": "消息通知",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"splitLine": {
+							"color": "#eee"
+						}
+					}
+				}
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "掌上业财",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#000"
+	},
+	"tabBar": {
+		"selectedColor": "#68bdf8",
+		"color": "#ccc",
+		"list": [{
+				"text": "消息",
+				"pagePath": "pages/message/message",
+				"iconPath": "static/icon/message.png",
+				"selectedIconPath": "static/icon/message-active.png"
+			},
+			{
+				"text": "统计",
+				"pagePath": "pages/statistics/statistics",
+				"iconPath": "static/icon/statistics.png",
+				"selectedIconPath": "static/icon/statistics-active.png"
+			},
+			{
+				"text": "工作台",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/icon/index.png",
+				"selectedIconPath": "static/icon/index-active.png"
+			},
+			{
+				"text": "通讯录",
+				"pagePath": "pages/contacts/contacts",
+				"iconPath": "static/icon/contacts.png",
+				"selectedIconPath": "static/icon/contacts-active.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/icon/my.png",
+				"selectedIconPath": "static/icon/my-active.png"
+			}
+		]
+	}
+}
