@@ -16,32 +16,23 @@
 </template>
 
 <script>
-	import {
-		areaCommon
-	} from '@/api/system.js'
-	
-	import {
-		getProject
-	} from '@/api/project'
-	import localCache from '@/util/cache.js'
+	import {project,area} from '@/pages/common/data.js'
 	export default {
 		data() {
 			return {
 				list:[],
 				tmpList: [],
 				type:'',
-				keyword: ''
+				keyword: '',
+				project,
+				area
 			}
 		},
 		async onLoad({type}) {
 			this.type = type
 			let data = []
 			if(type=='area'){
-				let area = localCache.getCache('cityList')
-				if(!area){
-					area = await areaCommon()
-				}
-				data = area.map(item=>{
+				data = this.area.map(item=>{
 					return {
 						title:item.cityName,
 						keyword:item.commonName,
@@ -51,10 +42,7 @@
 				})
 			}
 			if(type=='project'){
-				let project = localCache.getCache('projectList')
-				if(!project){
-					project = await getProject({notOver:true})
-				}
+				let project = this.project
 				data = project.map(item=>{
 					return {
 						title:item.name,

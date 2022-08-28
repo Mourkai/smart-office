@@ -3,7 +3,7 @@
 		<view class="header" v-if="!isShowCalendar">
 			<view class="title" v-text="editTitle"></view>
 		</view>
-		<renCalendar @onDisabled="disableDateFunc" @onDayClick="dayClick" v-if="isShowCalendar" @changeMonth="changeMonth" headerBar
+		<renCalendar @onDisabled="disableDateFunc" @onDayClick="dayClick" v-if="isShowCalendar" headerBar
 			:open="false" :markDays="markDays" disabledAfter />
 		<u-row class="p20 top-group" v-show="isShowTopButton && project.length > 1">
 			<u-col span="4">
@@ -99,21 +99,20 @@
 				</u-form-item>
 			</template>
 			<view class="btn-group">
-				<u-button type="info" shape="circle" v-if="isShowTopButton || show513" text="重置" @click="reset"></u-button>
-				<u-button type="primary" shape="circle" v-if="show513" text="维护历史数据" @click="submit('history')"></u-button>
+				<u-button type="info" shape="circle" v-if="isShowTopButton" text="重置" @click="reset"></u-button>
 				<u-button type="primary" v-if="isShowTopButton" shape="circle" text="提交" @click="submit('submit')"></u-button>
 			</view>
 		</u--form>
 		<u-picker :show="showWorkType" @confirm="confirmWorkType" @cancel="showWorkType=false" keyName="label"
 			:columns="workType" />
 	</view>
+	
 </template>
 <script>
 	import {
 		getProject,
 		postDailyReport,
 		getDateList,
-		getWorkType,
 		automaticUserInfo,
 		getDaily,
 		putDailyReport
@@ -122,10 +121,12 @@
 		areaCommon
 	} from '@/api/system.js'
 	import {
-		formVerb
+		formVerb,
+		workEnum
 	} from './config/daily.js'
 	import localCache from '@/util/cache.js'
 	import renCalendar from '@/components/ren-calendar/ren-calendar.vue'
+	import {project,area} from '@/pages/common/data.js'
 	export default {
 		name: 'add',
 		data() {
@@ -139,12 +140,11 @@
 				currentWorkTypeField: '_amWorkType',
 				isDiff: false,
 				editTitle:'',
-				show513:false,
 				isDataDone:false,//是否真正的渲染完成页面
 				markDays: [],
-				workType: [],
-				project: [],
-				city: [],
+				workType: workEnum,
+				project,
+				city: area,
 				formData: [],
 				dailyRecordDto: {},
 				sourceData: {
@@ -168,61 +168,22 @@
 					nextDayPlan: '', //明日计划
 					suggest: '', //工作建议。
 				},
+				autoInfo:{
+					"commonAreaId": "92fd81c3e91ac296cf9d70248b0fc728",
+					"projectId": "949837ffc9abb5e89a92514e18ab5e6c",
+					"address": "崂山办公室",
+					"projectName": "2022年度管理咨询事业部内控项目",
+					"projectCode": "SQ-2022-其他-00003",
+					"projectManagerName": "王小明"
+				},
 				resetData: {}
 			}
 		},
 		components: {
 			renCalendar
 		},
-		watch:{
-		    //检测是不是选择的请假或者节假日，如果是，今日明日内容不必填
-		    formData:{
-		      deep:true,
-		      handler(newValue){
-				if(newValue.length == 1){
-					if([3,4,5].indexOf(newValue[0].amWorkType) !== -1 && [3,4,5].indexOf(newValue[0].pmWorkType) !== -1){
-						this.isVacation[0] = true
-					}else{
-						this.isVacation[0] = false
-					}
-				}else{
-					newValue.forEach((item,index)=>{
-					  if(index === 0){
-					    this.isVacation[index] = [3,4,5].indexOf(item.amWorkType) !== -1
-					  }else{
-						this.isVacation[index] = [3,4,5].indexOf(item.pmWorkType) !== -1
-					  }
-					})
-				}
-				if(this.isDataDone){
-					const dailyList = localCache.getCache('dailyList') ?? []
-					let currentDailyIndex = dailyList.findIndex(item=>item.dailyRecordDto.fillDate == this.dailyRecordDto.fillDate)
-					if(currentDailyIndex == -1 && dailyList.length < 2){
-						dailyList.push({
-							dailyRecordDto:this.dailyRecordDto,
-							dailyRecordDetailsDtoList:this.formData
-						})
-					}else{
-						dailyList[currentDailyIndex] = {
-							dailyRecordDto:this.dailyRecordDto,
-							dailyRecordDetailsDtoList:this.formData
-						}
-					}
-					localCache.setCache('dailyList',dailyList)
-				}
-		      }
-		    }
-		  },
 		async created(data) {
-			const autoMatic = await automaticUserInfo()
-			this.formData = [{
-				...this.sourceData,
-				address:autoMatic.data.address,
-				projectId:autoMatic.data.projectId,
-				commonAreaId:autoMatic.data.commonAreaId
-			}]
-			const worktype = await getWorkType()
-			this.workType = [worktype.data]
+			this.workType = [this.workType]
 			this.$EventBus.$on('changeProjectOrArea', e => {
 				if (e.type == 'area') {
 					this.confirmCity(e.data)
@@ -294,27 +255,19 @@
 				this.showWorkType = false
 			},
 			async dayClick(e) {
-				const dateData = this.markDays.find(item => e.date == item.date)
 				this.isDataDone = false
-				const autoMatic = await automaticUserInfo()
+				const autoMatic = this.autoInfo
 				let overData = [{
 					...this.sourceData,
-					projectId:autoMatic.data.projectId,
-					code:autoMatic.data.projectCode,
-					_leaderName:autoMatic.data.projectManagerName,
-					projectName:autoMatic.data.projectName,
-					address:autoMatic.data.address,
-					commonAreaId:autoMatic.data.commonAreaId
+					projectId:autoMatic.projectId,
+					code:autoMatic.projectCode,
+					_leaderName:autoMatic.projectManagerName,
+					projectName:autoMatic.projectName,
+					address:autoMatic.address,
+					commonAreaId:autoMatic.commonAreaId
 				}]
 				const dailyListCache = localCache.getCache('dailyList') ?? []
-				const dailyCache = dailyListCache.find(item=>item.dailyRecordDto.fillDate == dateData.date)
-				let data = {}
-				if(!dateData.id && dailyCache){
-					data = dailyCache
-				}else{
-					let reData = await getDaily(dateData.id)
-					data = reData.data
-				}
+				let data = {dailyRecordDetailsDtoList:{}}
 				let dailyRecordDto = data
 				let dailyRecordDetailsDtoList = dailyRecordDto.dailyRecordDetailsDtoList
 				delete dailyRecordDto.createBy;
@@ -366,19 +319,12 @@
 					this.isDiff = false;
 					dailyRecordDetailsDtoList = [{}]
 					this.dailyRecordDto = {
-						...dailyRecordDto,
-						fillDate: dateData.date
+						...dailyRecordDto
 					}
 				}
-				const dailyDateNum = this.dailyRecordDto.fillDate.split("-").join("")
-				if (dailyDateNum <= 20220513 && this.dailyRecordDto.pass === 3 && this.dailyRecordDto.remark === 'history'){
-				    this.show513 = true;
-				}else{
-				    this.show513 = false;
-				}
 				overData.forEach((item, index) => {
-					const amWorkType = this.workType[0].find(workItem => item.amWorkType == workItem.value)
-					const pmWorkType = this.workType[0].find(workItem => item.pmWorkType == workItem.value)
+					const amWorkType = this.workType.find(workItem => item.amWorkType == workItem.value)
+					const pmWorkType = this.workType.find(workItem => item.pmWorkType == workItem.value)
 					const areaInfo = this.city.find(areaItem => item.commonAreaId == areaItem.id || item.commonAreaId == areaItem.cityId) || {}
 					overData[index].projectName = item.projectName
 					overData[index].code = item.code || item.projectCode
@@ -428,79 +374,14 @@
 				}
 			},
 			async submit(type) {
-				const userInfo = localCache.getCache('userInfo')
-				this.dailyRecordDto.userId = userInfo.userId
-				this.dailyRecordDto.processIsCommit = true
-				let dailyRecordDto = {}
-				if (this.formData.length === 1) { //同项目
-					dailyRecordDto.projectFlag = "Y"
-					dailyRecordDto.amWorkType = this.formData[0].amWorkType
-					dailyRecordDto.pmWorkType = this.formData[0].pmWorkType
-					this.formData[0].amPmFlag = 'AP'
-				} else if (this.formData.length === 2) { //不同项目
-					dailyRecordDto.projectFlag = "N"
-					dailyRecordDto.amWorkType = this.formData[0].amWorkType
-					dailyRecordDto.pmWorkType = this.formData[1].pmWorkType
-					this.formData[0].amPmFlag = 'A'
-					this.formData[1].amPmFlag = 'P'
-				} else return
-				const submitData = {
-					dailyRecordDetailsDtoList: [],
-					...this.dailyRecordDto,
-					...dailyRecordDto,
-					id:this.dailyRecordDto.id,
-					processIsCommit:true
-				}
-				const dailyRecordDetailsDtoList = JSON.parse(JSON.stringify(this.formData))
-				submitData.dailyRecordDetailsDtoList = dailyRecordDetailsDtoList.map(item=>{
-					delete item.code
-					return item
-				})
-				let submitMethod = postDailyReport
-				if(type === 'history'){
-					submitMethod = putDailyReport
-				}
 				if (formVerb(this.formData,this.isVacation)) {
-					const {
-						data
-					} = await submitMethod(submitData);
-					if (data) {
-						uni.$u.toast("提交成功")
-						//删除当前日的缓存
-						let dailyList = localCache.getCache('dailyList') ?? []
-						let currentDailyIndex = dailyList.findIndex(item=>item.dailyRecordDto.fillDate == this.dailyRecordDto.fillDate)
-						dailyList.splice(currentDailyIndex,1)
-						localCache.setCache('dailyList',dailyList)
-						const fillDate = this.dailyRecordDto.fillDate.split('-')
-						this.isShowTopButton = false
-						await this.changeMonth([fillDate[0], fillDate[1]])
-						if(this.isShowCalendar){
-							uni.navigateTo({
-								url: 'index'
-							})
-						}else{
-							//如果是修改页面的话，修改成功后返回详情页，并且执行详情页的loadData方法
-							let pages = getCurrentPages();
-							let beforePage = pages[pages.length - 2];   
-							uni.navigateBack({
-							    delta: 1,//返回上一级注意这里要设置为1
-							    success:()=>{
-							        beforePage.$vm.loadData({
-										id:this.dailyRecordDto.id,
-										name:`${userInfo.singleName}的工作日志`,
-										bpmStatus:1,
-										path:'project_daily_record',
-										createBy:userInfo.userId,
-									});
-							    }
-							})
-						}
-					}
+					uni.$u.toast("提交成功")
+					setTimeout(()=>{
+						uni.navigateTo({
+							url: 'index'
+						})
+					},1000)
 				}
-			},
-			async changeMonth(e) {
-				const dateList = await getDateList(`${e[0]}-${this.formatNum(e[1])}-01`)
-				this.markDays = dateList.data
 			},
 			formatNum(num) {
 				let res = Number(num);
@@ -508,16 +389,6 @@
 			}
 		},
 		async onLoad({editDate}) {
-			//项目
-			const project = await getProject({notOver:true})
-			this.project = project.data.rows
-			//城市
-			const city = await areaCommon()
-			this.city = city.data.rows
-			//每次进来缓存一下，用作选择页面的数据，空间换时间
-			localCache.setCache('projectList',this.project)
-			localCache.setCache('cityList',this.city)
-			//日期
 			let date = new Date();
 			let y = date.getFullYear();
 			let m = this.formatNum(date.getMonth() + 1);
@@ -533,7 +404,6 @@
 				d = editDateArr[2]
 			}
 			this.dailyRecordDto.fillDate = `${y}-${m}-${d}`
-			await this.changeMonth([y, m])
 			//如果刚加载进来的这一天就已经填报了的话，就获取一下填报信息
 			await this.dayClick({
 				date: this.dailyRecordDto.fillDate

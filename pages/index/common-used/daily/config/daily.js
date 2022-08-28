@@ -95,8 +95,38 @@ const sourceTab = [{
 	isOver: false,
 }]
 
+const workEnum = [
+    {
+        "label": "出勤",
+        "value": 1
+    },
+    {
+        "label": "出差",
+        "value": 2
+    },
+    {
+        "label": "请假",
+        "value": 3
+    },
+    {
+        "label": "法定节假日",
+        "value": 4
+    },
+    {
+        "label": "病假",
+        "value": 5
+    },
+    {
+        "label": "居家办公",
+        "value": 6
+    }
+]
+
+const project = 1
+
 export {
 	rightBtn,
 	sourceTab,
-	formVerb
+	formVerb,
+	workEnum
 }

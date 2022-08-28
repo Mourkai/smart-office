@@ -29,17 +29,6 @@
 	import CustomHeader from '@/components/custom-header/custom-header.vue'
 	import menu from './menu.js'
 	import localCache from '@/util/cache.js'
-	import {
-		getAppUserList
-	} from '@/api/system.js'
-	import {
-		count,
-		getNumByType,
-		indexNotice
-	} from '@/api/msg.js'
-	import {
-		isHaveEvaluationUnconfirmed
-	} from '@/api/hr.js'
 	export default {
 		data() {
 			return {
@@ -60,51 +49,16 @@
 			CustomHeader
 		},
 		async onLoad() {
-			const {data} = await indexNotice()
-			this.notice = data.title
-			const url = `/pages/index/notice?url=${data.content}&contentType=${data.contentType}&title=${data.title}&date=${data.sendDate}`;
+			this.notice = "该版本为演示版本，已去除敏感信息"
+			const url = `/pages/index/notice`;
 			this.noticeUrl = url
 		},
 		async onShow() {
-			//判断是否有待确认绩效
-			isHaveEvaluationUnconfirmed().then(res=>{
-				const resultData = !!res.data
-				this.setMenu(0,4,resultData)
-				this.setMenu(3,5,resultData)
+			uni.setTabBarBadge({
+				index: 0,
+				text: '3'
 			})
-			
-			//获取每日一评数量
-			getNumByType(3).then(({data})=>{
-				let isDot = false;
-				let badge = 0
-				if(data){
-					if(data.whetherNewMsg){
-						isDot = true
-					}
-					if(data.relatedToMeNum > 0){
-						isDot = false
-						badge = data.relatedToMeNum
-					}
-					this.setMenu(0,3,isDot,badge)
-					this.setMenu(6,0,isDot,badge)
-				}
-			})
-			if (this.$refs.cheader) {
-				this.$refs.cheader.updateHeader()
-			}
-			const {
-				data
-			} = await count()
-			if (data > 0) {
-				uni.setTabBarBadge({
-					index: 0,
-					text: data.toString()
-				})
-			} else {
-				uni.removeTabBarBadge({
-					index: 0
-				})
-			}
+			//轮播图高度适配
 			uni.getSystemInfo({
 				success: (e) => {
 					if(e.safeArea.width < 350){
@@ -114,23 +68,10 @@
 			})
 		},
 		methods: {
-			back() {},
 			toPage(url) {
 				uni.navigateTo({
 					url
 				})
-			},
-			setMenu(menuIndex,listIndex,isDot,badge){
-				if(isDot){
-					this.$set(this.menu[menuIndex].list,listIndex,{...this.menu[menuIndex].list[listIndex],isDot:true})
-				}else{
-					this.$set(this.menu[menuIndex].list,listIndex,{...this.menu[menuIndex].list[listIndex],isDot:false})
-				}
-				if(badge){
-					this.$set(this.menu[menuIndex].list,listIndex,{...this.menu[menuIndex].list[listIndex],badge})
-				}else{
-					this.$set(this.menu[menuIndex].list,listIndex,{...this.menu[menuIndex].list[listIndex],badge:0})
-				}
 			}
 		}
 	}

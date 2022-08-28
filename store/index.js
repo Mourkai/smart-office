@@ -1,16 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {
-	accountLoginRequest,
-	userLogout
-} from '@/api/user.js'
-import {
-	getMyInfo,
-	getProcessCategory,
-	connectSocket,
-	treeListWithUserCount,
-	allArea
-} from '@/api/system.js'
 import localCache from '@/util/cache.js'
 import update from "./modules/update";
 import organization from "./modules/organization";
@@ -33,7 +22,7 @@ const store = new Vuex.Store({
 		}
 	},
 	actions: {
-		async accountLogin({
+		accountLogin({
 			commit,
 			dispatch
 		}, payload) {
@@ -43,27 +32,33 @@ const store = new Vuex.Store({
 			if (payload.remember == 1) {
 				localCache.setCache('userRemember', payload)
 			}
-			const loginResult = await accountLoginRequest(payload)
-			const token = loginResult.data.access_token
+			const token = "f7c1323d-b350-4cdf-a0ea-63848be7303a"
 			commit('changeToken', token)
 			localCache.setCache('token', token)
-			const {
-				data
-			} = await getMyInfo()
+			const data = {
+				"userId": "d4f3281492f24e92a373eb95a940b849",
+				"singleName": "邱鹏",
+				"orgParentName": "项目管理中心",
+				"orgId": "134",
+				"orgName": "智慧财务与咨询事业部",
+				"orgLeader": "ba96cbf796945a4765edb3f4a8519a5d",
+				"orgLeaderName": "王涌",
+				"orgCode": null,
+				"orgAuthCode": "1-3-6",
+				"orgType": 4,
+				"orgTypeLabel": null,
+				"postId": "4a94a1d3a20841edf40622c9873f8778",
+				"postName": "事业部副总",
+				"leader": "d4f3281492f24e92a373eb95a940b849",
+				"leaderName": "邱鹏",
+				"baseAddressId": "92fd81c3e91ac296cf9d70248b0fc728",
+				"baseAddress": "山东省青岛市",
+				"sex": 0
+			}
 			localCache.setCache('userInfo', data)
 			commit('changeUserInfo', data)
 			//获取字典值
-			const dict = await getProcessCategory()
-			const allAreaData = await allArea()
-			localCache.setCache('businessModule', dict.data)
-			localCache.setCache('allArea', allAreaData.data)
 			uni.$u.toast("登录成功")
-			//const orgUsersList = await treeListWithUserCount()
-			//localCache.setCache('orgUsersList', orgUsersList.data[0])
-			connectSocket({
-				token,
-				userId:data.userId
-			})
 			setTimeout(() => {
 				uni.switchTab({
 					url: '/pages/index/index'
@@ -87,7 +82,6 @@ const store = new Vuex.Store({
 			commit,
 			dispatch
 		}, payload) {
-			await userLogout()
 			const userRemember = localCache.getCache('userRemember')
 			localCache.clearCache()
 			localCache.setCache('userRemember', userRemember)

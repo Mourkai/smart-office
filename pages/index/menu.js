@@ -4,7 +4,7 @@ const menu = [
 		list:[
 			{title:'日志',icon:'../../static/menu/ribao.png',url:'/pages/index/common-used/daily/add'},
 			{title:'打卡',icon:'../../static/menu/daka.png',url:'/pages/index/no-page'},
-			{title:'审批',icon:'../../static/menu/oashenpi.png',url:'/pages/index/common-used/oa/index'},
+			{title:'审批',icon:'../../static/menu/oashenpi.png',url:'/pages/index/common-used/oa/index',badge:2},
 			{title:'每日一评',icon:'../../static/menu/meiriyiping.png',url:'/pages/index/other/comment/index'},
 			{title:'绩效',icon:'../../static/menu/jixiao.png',url:'/pages/index/personnel/result/index'},
 			{title:'添加',icon:'../../static/menu/tianjia.png',url:'/pages/index/no-page'}
